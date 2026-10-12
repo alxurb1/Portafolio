@@ -53,11 +53,11 @@ Las capturas publicables van en `public/projects/`, dentro de la carpeta de cada
 ```ts
 export const projectMedia = {
   serviTaller: {
-    dashboard: ["/projects/servitaller/img2.png"],
+    dashboard: [projectAsset("servitaller/img2.png")],
   },
 };
 ```
 
-La ficha muestra las imágenes en el orden del arreglo. `imageAlt` describe una captura; `imageAlts` permite dar un texto diferente a cada imagen cuando hay varias. Si una funcionalidad no tiene imágenes asociadas, se muestra su descripción sin galería. Antes de añadir capturas, comprobá que correspondan al texto y que los datos visibles se puedan publicar.
+`projectAsset` antepone la base del sitio a cada ruta. La ficha muestra las imágenes en el orden del arreglo. `imageAlt` describe una captura; `imageAlts` permite dar un texto diferente a cada imagen cuando hay varias. Si una funcionalidad no tiene imágenes asociadas, se muestra su descripción sin galería. Antes de añadir capturas, comprobá que correspondan al texto y que los datos visibles se puedan publicar.
 
 Los estilos generales están en [`src/index.css`](src/index.css), los componentes en [`src/components/`](src/components/) y los metadatos iniciales en [`index.html`](index.html).
