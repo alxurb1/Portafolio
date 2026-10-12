@@ -101,22 +101,28 @@ export const projects: Project[] = [
   },
 ];
 
+const projectAsset = (fileName: string) =>
+  `${import.meta.env.BASE_URL}projects/${fileName}`;
+
 export const projectMedia: Partial<
   Record<ProjectId, Record<string, string[]>>
 > = {
   focusBear: {
-    streaks: ["/projects/focus-bear/img1.jpg", "/projects/focus-bear/img2.jpg"],
-    taskFilters: ["/projects/focus-bear/img3.jpg"],
-    audhdTest: ["/projects/focus-bear/img4.jpg"],
+    streaks: [
+      projectAsset("focus-bear/img1.jpg"),
+      projectAsset("focus-bear/img2.jpg"),
+    ],
+    taskFilters: [projectAsset("focus-bear/img3.jpg")],
+    audhdTest: [projectAsset("focus-bear/img4.jpg")],
     overlays: [
-      "/projects/focus-bear/img5.jpg",
-      "/projects/focus-bear/img6.jpg",
+      projectAsset("focus-bear/img5.jpg"),
+      projectAsset("focus-bear/img6.jpg"),
     ],
   },
   serviTaller: {
-    signIn: ["/projects/servitaller/img1.png"],
-    dashboard: ["/projects/servitaller/img2.png"],
-    vehicles: ["/projects/servitaller/img3.png"],
+    signIn: [projectAsset("servitaller/img1.png")],
+    dashboard: [projectAsset("servitaller/img2.png")],
+    vehicles: [projectAsset("servitaller/img3.png")],
   },
 };
 
