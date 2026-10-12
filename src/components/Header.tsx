@@ -1,7 +1,20 @@
 import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import type { Language, LocaleContent } from "../data/content";
 
-export default function Header() {
+type HeaderProps = {
+  language: Language;
+  onLanguageChange: (language: Language) => void;
+  copy: LocaleContent;
+  isDetail: boolean;
+};
+
+export default function Header({
+  language,
+  onLanguageChange,
+  copy,
+  isDetail,
+}: HeaderProps) {
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
@@ -25,23 +38,34 @@ export default function Header() {
     <header className="site-header page-grid">
       <a
         className="wordmark"
-        href="#inicio"
-        aria-label="Oscar Urbáez, volver al inicio"
+        href={isDetail ? "./#inicio" : "#inicio"}
+        aria-label={copy.brandLabel}
       >
         O<span>U</span>
         <i aria-hidden="true">✳</i>
       </a>
       <span className="header-coordinate" aria-hidden="true">
-        DESARROLLO / DESDE SV
+        {copy.nav.coordinate}
       </span>
-      <nav aria-label="Navegación principal" className="header-nav">
-        <a href="#proyectos">PROYECTOS</a>
-        <a href="#contacto">CONTACTO</a>
+      <nav aria-label={copy.navigationLabel} className="header-nav">
+        <a href={isDetail ? "./#proyectos" : "#proyectos"}>
+          {copy.nav.projects}
+        </a>
+        <a href="#contacto">{copy.nav.contact}</a>
+        <button
+          type="button"
+          className="language-button"
+          onClick={() => onLanguageChange(language === "es" ? "en" : "es")}
+          aria-label={copy.languageLabel}
+          title={copy.languageLabel}
+        >
+          {language === "es" ? "EN" : "ES"}
+        </button>
         <button
           type="button"
           onClick={toggleTheme}
-          aria-label={isDark ? "Activar tema claro" : "Activar tema oscuro"}
-          title={isDark ? "Activar tema claro" : "Activar tema oscuro"}
+          aria-label={isDark ? copy.theme.lightLabel : copy.theme.darkLabel}
+          title={isDark ? copy.theme.lightLabel : copy.theme.darkLabel}
           className="theme-button"
         >
           {isDark ? (
@@ -49,7 +73,7 @@ export default function Header() {
           ) : (
             <Moon size={17} aria-hidden="true" />
           )}
-          <span>{isDark ? "CLARO" : "OSCURO"}</span>
+          <span>{isDark ? copy.theme.light : copy.theme.dark}</span>
         </button>
       </nav>
     </header>

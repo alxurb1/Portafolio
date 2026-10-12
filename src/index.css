@@ -136,6 +136,7 @@ a {
 }
 .header-coordinate,
 .header-nav,
+.language-button,
 .theme-button,
 .hero-eyebrow,
 .art-header,
@@ -174,6 +175,25 @@ a {
   transition: color 0.2s;
 }
 .header-nav > a:hover {
+  color: var(--accent);
+}
+.language-button {
+  display: grid;
+  place-items: center;
+  min-width: 35px;
+  min-height: 36px;
+  padding: 0 7px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.language-button:hover {
+  border-color: var(--accent);
   color: var(--accent);
 }
 .theme-button {
@@ -636,7 +656,7 @@ a {
 .project-emblem {
   position: relative;
   display: grid;
-  min-height: 240px;
+  height: 240px;
   place-items: center;
   overflow: hidden;
   background: var(--panel);
@@ -686,18 +706,6 @@ a {
   font-size: 22px;
   font-style: normal;
 }
-.project-emblem:has(.project-screenshot)::before,
-.project-emblem:has(.project-screenshot)::after {
-  display: none;
-}
-.project-screenshot {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 240px;
-  object-fit: cover;
-  object-position: top;
-}
 .project-emblem-2 {
   background: color-mix(in srgb, var(--panel) 82%, var(--accent));
 }
@@ -744,6 +752,9 @@ a {
   line-height: 1;
   letter-spacing: -0.065em;
 }
+.project-copy h3 a:hover {
+  color: var(--accent);
+}
 .project-copy > p {
   max-width: 610px;
   margin: 0;
@@ -776,12 +787,146 @@ a {
 .project-links a {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   border-bottom: 1px solid var(--ink);
   padding-bottom: 3px;
 }
 .project-links a:hover {
   color: var(--accent);
+}
+
+.report-page {
+  padding-block: 34px 115px;
+}
+.report-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.report-back:hover {
+  color: var(--accent);
+}
+.report-header {
+  margin-top: 70px;
+  padding-bottom: 65px;
+  border-bottom: 1px solid var(--ink);
+}
+.report-header h1 {
+  max-width: 1050px;
+  margin: 34px 0 48px;
+  font-size: clamp(68px, 10vw, 154px);
+  line-height: 0.9;
+  letter-spacing: -0.09em;
+}
+.report-intro {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr);
+  gap: 40px;
+  align-items: start;
+}
+.report-intro > span,
+.report-feature-index,
+.report-tech > span {
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.report-intro p {
+  max-width: 780px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2.2vw, 27px);
+  line-height: 1.45;
+}
+.report-features {
+  padding-block: 83px 95px;
+}
+.report-features h2 {
+  margin: 20px 0 45px;
+  font-size: clamp(48px, 6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.075em;
+}
+.report-feature-list {
+  border-top: 1px solid var(--ink);
+}
+.report-feature {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  gap: 30px;
+  padding: 34px 0 42px;
+  border-bottom: 1px solid var(--line);
+}
+.report-feature-body h3 {
+  margin: 0 0 15px;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+.report-feature-body > p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.report-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 15px;
+  max-width: 1000px;
+  margin-top: 28px;
+}
+.report-gallery a {
+  position: relative;
+  display: grid;
+  min-height: 240px;
+  max-height: 520px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--soft-line);
+  background: var(--panel);
+}
+.report-gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+.report-gallery a:hover img {
+  transform: scale(1.025);
+}
+.report-gallery svg {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  box-sizing: content-box;
+  padding: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.report-tech {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 50px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ink);
+}
+.report-tech .project-stack {
+  margin: 0;
+  padding: 0;
 }
 
 .site-footer {
@@ -839,7 +984,7 @@ a {
 .footer-links a {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 9px;
 }
 .footer-links a:hover {
   color: var(--accent);
@@ -917,10 +1062,13 @@ a {
   }
   .project-emblem {
     grid-column: 2;
-    min-height: 260px;
+    height: 260px;
   }
   .project-copy {
     grid-column: 2;
+  }
+  .report-header {
+    margin-top: 50px;
   }
 }
 @media (max-width: 560px) {
@@ -1010,13 +1158,38 @@ a {
     grid-column: 1;
   }
   .project-emblem {
-    min-height: 210px;
+    height: 210px;
   }
   .project-meta {
     font-size: 9px;
   }
   .project-copy h3 {
     margin-top: 15px;
+  }
+  .report-page {
+    padding-block: 18px 80px;
+  }
+  .report-header {
+    margin-top: 45px;
+    padding-bottom: 45px;
+  }
+  .report-header h1 {
+    margin: 28px 0 36px;
+    font-size: clamp(55px, 14vw, 86px);
+  }
+  .report-intro {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .report-features {
+    padding-block: 65px;
+  }
+  .report-feature {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 15px;
+  }
+  .report-feature-body > p {
+    font-size: 14px;
   }
   .footer-main {
     align-items: start;

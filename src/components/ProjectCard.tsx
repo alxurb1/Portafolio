@@ -1,38 +1,41 @@
-import { ArrowUpRight } from "lucide-react";
-import type { Project } from "../data/content";
+import { ExternalLink } from "lucide-react";
+import type { LocaleContent, Project } from "../data/content";
+import { GithubMark } from "./BrandIcons";
 
-type ProjectCardProps = { project: Project; number: number };
+type ProjectCardProps = {
+  project: Project;
+  copy: LocaleContent["projects"][Project["id"]];
+  labels: LocaleContent["projectLabels"];
+  number: number;
+};
 
-export default function ProjectCard({ project, number }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  copy,
+  labels,
+  number,
+}: ProjectCardProps) {
   return (
     <article className="project-row">
       <div className="project-index">{String(number).padStart(2, "0")}</div>
-      <div
+      <a
         className={`project-emblem project-emblem-${number}`}
-        aria-hidden={project.screenshot ? undefined : true}
+        href={`?proyecto=${project.slug}`}
+        aria-label={`${labels.openReport} ${copy.name}`}
       >
-        {project.screenshot ? (
-          <img
-            className="project-screenshot"
-            src={project.screenshot.src}
-            alt={project.screenshot.alt}
-            loading="lazy"
-          />
-        ) : (
-          <>
-            <span>{project.mark}</span>
-            <i>↗</i>
-          </>
-        )}
-      </div>
+        <span aria-hidden="true">{project.mark}</span>
+        <i aria-hidden="true">↗</i>
+      </a>
       <div className="project-copy">
         <div className="project-meta">
-          <span>{project.tagline}</span>
-          <span>{project.role}</span>
+          <span>{copy.tagline}</span>
+          <span>{copy.role}</span>
         </div>
-        <h3>{project.name}</h3>
-        <p>{project.description}</p>
-        <ul className="project-stack" aria-label="Tecnologías utilizadas">
+        <h3>
+          <a href={`?proyecto=${project.slug}`}>{copy.name}</a>
+        </h3>
+        <p>{copy.description}</p>
+        <ul className="project-stack" aria-label={labels.technologies}>
           {project.stack.map((tech) => (
             <li key={tech}>{tech}</li>
           ))}
@@ -45,7 +48,8 @@ export default function ProjectCard({ project, number }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                VER PROYECTO <ArrowUpRight size={16} aria-hidden="true" />
+                <ExternalLink size={16} aria-hidden="true" />
+                {labels.live}
               </a>
             )}
             {project.links.github && (
@@ -54,7 +58,8 @@ export default function ProjectCard({ project, number }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                VER CÓDIGO <ArrowUpRight size={16} aria-hidden="true" />
+                <GithubMark size={16} />
+                {labels.code}
               </a>
             )}
           </div>

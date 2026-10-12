@@ -1,8 +1,10 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import type { PointerEvent } from "react";
-import { contact } from "../data/content";
+import { contact, type LocaleContent } from "../data/content";
 
-function DeviceScene() {
+type HeroCopy = LocaleContent["hero"];
+
+function DeviceScene({ copy }: { copy: HeroCopy }) {
   function moveDevice(event: PointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "mouse") return;
     const { left, top, width, height } =
@@ -31,9 +33,7 @@ function DeviceScene() {
       <div className="float-label float-label-top">
         REACT NATIVE / TYPESCRIPT
       </div>
-      <div className="float-label float-label-bottom">
-        BUILDING FOR REAL LIFE ↗
-      </div>
+      <div className="float-label float-label-bottom">{copy.artFloating}</div>
       <div className="phone-shadow" />
       <div className="phone-wrap">
         <div className="phone-back" />
@@ -45,7 +45,7 @@ function DeviceScene() {
               <span>09:41</span>
               <span>•••</span>
             </div>
-            <div className="screen-label">OSCAR / ENGINEER</div>
+            <div className="screen-label">{copy.screenLabel}</div>
             <div className="screen-core">
               <span className="core-ring core-ring-outer" />
               <span className="core-ring core-ring-inner" />
@@ -54,7 +54,7 @@ function DeviceScene() {
               </span>
             </div>
             <div className="screen-bottom">
-              <span>IDEA → INTERFAZ</span>
+              <span>{copy.screenBottom}</span>
               <span>01 / 03</span>
             </div>
           </div>
@@ -66,7 +66,7 @@ function DeviceScene() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ copy }: { copy: HeroCopy }) {
   return (
     <section
       id="inicio"
@@ -76,52 +76,46 @@ export default function Hero() {
       <div className="hero-copy">
         <div className="hero-eyebrow">
           <span className="signal-square" aria-hidden="true" />
-          PORTAFOLIO / MOBILE ENGINEER / {new Date().getFullYear()}
+          {copy.eyebrow} / {new Date().getFullYear()}
         </div>
-        <p className="hero-intro">Hola, soy Oscar Urbáez.</p>
+        <p className="hero-intro">{copy.intro}</p>
         <h1 id="hero-title">
-          Hago que
+          {copy.titleLine1}
           <br />
-          las ideas <em>vivan</em>
+          {copy.titleLine2} <em>{copy.titleEmphasis}</em>
           <br />
-          en pantalla<span className="hero-period">.</span>
+          {copy.titleLine3}
+          <span className="hero-period">.</span>
         </h1>
-        <p className="hero-description">
-          Desarrollo productos móviles con React Native y TypeScript. En Focus
-          Bear trabajo en funcionalidades y mejoras para una app que ya está en
-          manos de usuarios.
-        </p>
+        <p className="hero-description">{copy.description}</p>
         <div className="hero-actions">
           <a className="action-primary" href="#proyectos">
-            VER PROYECTOS <ArrowDownRight size={19} aria-hidden="true" />
+            {copy.projectsAction}{" "}
+            <ArrowDownRight size={19} aria-hidden="true" />
           </a>
           <a className="action-text" href={`mailto:${contact.email}`}>
-            HABLEMOS <ArrowUpRight size={18} aria-hidden="true" />
+            {copy.contactAction} <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
       </div>
       <div className="hero-art">
         <div className="art-header">
           <span>FIG. 01</span>
-          <span>FORM / FUNCTION</span>
+          <span>{copy.artForm}</span>
         </div>
-        <DeviceScene />
+        <DeviceScene copy={copy} />
         <div className="art-footer">
-          <span>DISEÑADO PARA EL MUNDO REAL</span>
+          <span>{copy.artFooter}</span>
           <span>↘</span>
         </div>
       </div>
       <div className="hero-bottom">
-        <span>
-          <b>01</b> / REACT NATIVE
-        </span>
-        <span>
-          <b>02</b> / TYPESCRIPT
-        </span>
-        <span>
-          <b>03</b> / PRODUCT THINKING
-        </span>
-        <span className="hero-bottom-location">EL SALVADOR ↗ REMOTO</span>
+        {copy.skills.map((skill, index) => (
+          <span key={skill}>
+            <b>{String(index + 1).padStart(2, "0")}</b> / {skill}
+          </span>
+        ))}
+        <span className="hero-bottom-location">{copy.location}</span>
       </div>
     </section>
   );
